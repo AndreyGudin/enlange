@@ -3,8 +3,8 @@ import img_1 from '../../assets/img-1.png';
 export const Info = () => {
   return (
     <section className="flex justify-around">
-      <div className="flex flex-col max-w-lg gap-8">
-        <div className="flex flex-col gap-3 ">
+      <div className="flex flex-col max-w-lg gap-8 self-center">
+        <div className="flex flex-col gap-3">
           <span>For Better Future</span>
           <span className="text-6xl uppercase">High quality games</span>
           <span className="text-xl tracking-wider">Find game what you like</span>
