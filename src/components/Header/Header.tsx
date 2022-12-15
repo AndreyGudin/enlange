@@ -1,6 +1,6 @@
 export const Header = () => {
   return (
-    <header className="flex flex-row w-full justify-around align-middle p-3 fixed top-0">
+    <header className="flex flex-row w-full justify-around align-middle p-3">
       <div>
         <h1 className="text-3xl">Enlange</h1>
       </div>
