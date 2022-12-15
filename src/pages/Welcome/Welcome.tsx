@@ -22,7 +22,6 @@ export const Welcome = () =>{
   ];
   return (
     <>
-      <Header />
       <Info />
       <UsingStats stats={stats}/>
       <Description cards={<AdvantagesCards cards= {cards}/>} />
