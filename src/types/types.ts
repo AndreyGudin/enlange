@@ -1,25 +1,50 @@
 import React from 'react';
-import { JsxElement } from 'typescript';
 
-export type UsingStatsProps = {
+type UsingStatsProps = {
   stats: UsingStatsType[];
 };
 
-export type UsingStatsType = {
+type UsingStatsType = {
   title: string;
   info: string;
 };
 
-export type DescriptionProps = {
+type DescriptionProps = {
   cards: React.ReactNode;
 };
 
-export type AdvantagesCardsType = {
+type AdvantagesCardsType = {
   image: string;
   title: string;
   description: string;
 };
 
-export type AdvantagesCardsProps = {
+type AdvantagesCardsProps = {
   cards: AdvantagesCardsType[];
+};
+
+type Word = {
+  id: string;
+  group: number;
+  page: number;
+  word: string;
+  image: string;
+  audio: string;
+  audioMeaning: string;
+  audioExample: string;
+  textMeaning: string;
+  textExample: string;
+  transcription: string;
+  wordTranslate: string;
+  textMeaningTranslate: string;
+  textExampleTranslate: string;
+};
+
+export {
+  UsingStatsProps,
+  UsingStatsType,
+  DescriptionProps,
+  AdvantagesCardsType,
+  AdvantagesCardsProps,
+  Word,
 };
