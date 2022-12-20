@@ -23,6 +23,10 @@ type AdvantagesCardsProps = {
   cards: AdvantagesCardsType[];
 };
 
+type WordsProps = {
+  words: Word[];
+}
+
 type Word = {
   id: string;
   group: number;
@@ -47,4 +51,5 @@ export {
   AdvantagesCardsType,
   AdvantagesCardsProps,
   Word,
+  WordsProps
 };
