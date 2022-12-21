@@ -27,6 +27,13 @@ type WordsProps = {
   words: Word[];
 }
 
+type usePaginationProps = {
+  totalCount: number;
+  pageSize: number;
+  siblingCount: number;
+  currentPage: number;
+}
+
 type Word = {
   id: string;
   group: number;
@@ -51,5 +58,6 @@ export {
   AdvantagesCardsType,
   AdvantagesCardsProps,
   Word,
-  WordsProps
+  WordsProps,
+  usePaginationProps
 };
