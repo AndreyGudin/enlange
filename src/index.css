@@ -46,6 +46,6 @@ body {
 
 @layer base {
   .pagination-item{
-    @apply px-0 py-3 h-8 text-center mx-auto my-1 text-slate-400 flex box-border justify-center items-center tracking-wide rounded text-xs hover:cursor-pointer hover:text-white hover:bg-slate-400 min-w-[32px];
+    @apply px-0 py-3 h-8 text-center mx-auto my-1 text-slate-400 flex box-border justify-center items-center tracking-wide rounded text-xs hover:cursor-pointer hover:text-white hover:bg-slate-400 min-w-[32px] duration-300;
   }
 }

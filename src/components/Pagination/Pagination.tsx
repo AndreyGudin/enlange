@@ -32,16 +32,16 @@ export const Pagination = ({ onPageChange, currentPage }: PaginationProps) => {
   };
 
   let lastPage = paginationRange ? paginationRange[paginationRange.length - 1] : 1;
-  let disabled = currentPage === 1 ? 'disabled' : 'active';
-  const paginationItem = "px-0 py-3 h-8 text-center mx-auto my-1 text-slate-400 flex box-border justify-center items-center tracking-wide rounded text-xs hover:cursor-pointer hover:text-white hover:bg-slate-400 min-w-[32px]";
+  let disabledLeft = currentPage === 1 ? 'pointer-events-none border-slate-500' : 'border-white';
+  let disabledRight = currentPage === lastPage ? 'pointer-events-none border-slate-500' : 'border-white'
   return (
     <ul className="flex list-none">
-      <li className={disabled} onClick={onPrevious}>
-        <div className="arrow left" />
+      <li className={`pagination-item ${disabledLeft}`} onClick={onPrevious}>
+        <div className={`relative inline-block w-2 h-2 border-r-2 border-t-2 ${disabledLeft} rotate-[-135deg]`} />
       </li>
       {paginationRange?.map((pageNumber, i) => {
         if (pageNumber === DOTS) {
-          return <li className="pagination-item dots">&#8230;</li>;
+          return <li className="pagination-item hover:cursor-default hover:bg-transparent hover:text-slate-400">&#8230;</li>;
         }
         let selected = pageNumber === currentPage ? 'border' : '';
         return (
@@ -50,8 +50,8 @@ export const Pagination = ({ onPageChange, currentPage }: PaginationProps) => {
           </li>
         );
       })}
-      <li className={`${currentPage === lastPage ? 'disabled' : 'active'}`} onClick={onNext}>
-        <div className="arrow right" />
+      <li className={`pagination-item ${disabledRight}`} onClick={onNext}>
+        <div className={`relative inline-block w-2 h-2 border-r-2 border-t-2 ${disabledRight} rotate-[45deg]`} />
       </li>
     </ul>
   );
