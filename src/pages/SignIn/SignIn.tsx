@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form';
 
 import { User } from '../../types/types';
-import img from "../../assets/5293.svg";
+import img from '../../assets/5293.svg';
+import { NavLink } from 'react-router-dom';
 export const SignIn = () => {
   const {
     register,
@@ -14,11 +15,7 @@ export const SignIn = () => {
       <div className="flex px-6 py-12 h-full justify-center items-center">
         <div className="flex w-8/12 justify-center items-center flex-wrap g-6 text-gray-800 bg-indigo-500 h-auto py-4 rounded-2xl">
           <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
-            <img
-              src={img}
-              className="w-full"
-              alt="Phone image"
-            />
+            <img src={img} className="w-full" alt="Phone image" />
           </div>
           <div className="md:w-8/12 lg:w-5/12">
             <form className="flex flex-col items-center w-full">
@@ -52,12 +49,12 @@ export const SignIn = () => {
                     Запомнить меня
                   </label>
                 </div>
-                <a
-                  href="#!"
+                <NavLink
                   className="text-black hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
+                  to="/signup"
                 >
-                  Забыли пароль?
-                </a>
+                  Ещё не зарегистрированы?
+                </NavLink>
               </div>
               <button
                 type="submit"

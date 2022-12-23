@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 
 import { User } from '../../types/types';
 import img from '../../assets/56431.svg';
+import { NavLink } from 'react-router-dom';
 export const SignUp = () => {
   const {
     register,
@@ -47,12 +48,12 @@ export const SignUp = () => {
                 />
               </div>
               <div className="flex justify-between items-center w-full mb-6">
-                <a
-                  href="#!"
+                <NavLink
+                  to="/signin"
                   className="text-black hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
                 >
                   Уже зарегистрированы?
-                </a>
+                </NavLink>
               </div>
               <button
                 type="submit"
