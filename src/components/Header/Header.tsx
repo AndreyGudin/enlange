@@ -37,9 +37,14 @@ export const Header = () => {
         >
           Автор
         </NavLink>
+
       </nav>
       <div className="flex flex-row gap-5 items-center">
+      <NavLink
+          to="/signin"
+        >
         <button>Вход</button>
+        </NavLink>
         <button className="w-[137px] h-[52px] bg-purple-600 rounded hover:bg-purple-500 duration-300">
           Присоединится
         </button>
