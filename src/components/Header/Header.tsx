@@ -43,11 +43,15 @@ export const Header = () => {
       <NavLink
           to="/signin"
         >
-        <button>Вход</button>
+        <button className="text-white">Вход</button>
         </NavLink>
-        <button className="w-[137px] h-[52px] bg-purple-600 rounded hover:bg-purple-500 duration-300">
+        <NavLink
+          to="/signup"
+        >
+        <button className="text-white w-[137px] h-[52px] bg-purple-600 rounded hover:bg-purple-500 duration-300">
           Присоединится
         </button>
+        </NavLink>
       </div>
     </header>
   );
