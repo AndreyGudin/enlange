@@ -51,6 +51,12 @@ type Word = {
   textExampleTranslate: string;
 };
 
+type User = {
+  name: string;
+  email?: string;
+  password: string;
+};
+
 export {
   UsingStatsProps,
   UsingStatsType,
@@ -59,5 +65,6 @@ export {
   AdvantagesCardsProps,
   Word,
   WordsProps,
-  usePaginationProps
+  usePaginationProps,
+  User
 };
