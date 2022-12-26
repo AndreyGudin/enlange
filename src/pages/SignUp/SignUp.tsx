@@ -1,15 +1,17 @@
 import { useForm } from 'react-hook-form';
 
-import { User } from '../../types/types';
+import { RegisterFormProps, User } from '../../types/types';
 import img from '../../assets/56431.svg';
 import { NavLink } from 'react-router-dom';
+import { Alert } from '../../components/Alert/Alert';
 export const SignUp = () => {
   const {
     register,
     handleSubmit,
+    watch,
     reset,
     formState: { errors, isDirty, isValid },
-  } = useForm<User>({ mode: 'all' });
+  } = useForm<RegisterFormProps>({ mode: 'onChange' });
   return (
     <section className="h-screen">
       <div className="flex px-6 py-12 h-full justify-center items-center">
@@ -21,31 +23,55 @@ export const SignUp = () => {
             <form className="flex flex-col items-center w-full">
               <div className="mb-6 w-full">
                 <input
+                  {...register('name', { required: true, minLength: 2 })}
                   type="text"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Username"
                 />
+                {errors.name?.type === 'required' ? <Alert text="Name is required" /> : null}
+                {errors.name?.type === 'minLength' ? <Alert text="Name is too short" /> : null}
               </div>
               <div className="mb-6 w-full">
                 <input
-                  type="text"
+                  {...register('email', {
+                    required: true,
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: 'Incorrect email',
+                    },
+                  })}
+                  type="email"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Email address"
                 />
+                {errors.email?.type === 'required' ? <Alert text="Email is required" /> : null}
+                {errors.email && <Alert text={errors.email.message as string} />}
               </div>
               <div className="mb-6 w-full">
                 <input
+                  {...register('password', { required: true, minLength: 6 })}
                   type="password"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Password"
                 />
+                {errors.password?.type === 'required' && <Alert text="Password is required" />}
+                {errors.password?.type === 'minLength' && <Alert text="Password is too short" />}
               </div>
               <div className="mb-6 w-full">
                 <input
+                  {...register('confirmPassword', 
+                  { required: true, 
+                    minLength: 6,
+                    validate:(val:string) => {
+                      if (watch("password") != val) return "Your passwords do not match";
+                    } })}
                   type="password"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Confirm Password"
                 />
+                {errors.confirmPassword?.type === 'required' && <Alert text="Password is required" />}
+                {errors.confirmPassword?.type === 'minLength' && <Alert text="Password is too short" />}
+                {errors.confirmPassword && <Alert text={errors.confirmPassword.message as string} />}
               </div>
               <div className="flex justify-between items-center w-full mb-6">
                 <NavLink
@@ -60,8 +86,9 @@ export const SignUp = () => {
                 className="inline-block px-7 py-3 bg-indigo-900 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
+                disabled={!isValid}
               >
-                Вход
+                Регистрация
               </button>
             </form>
           </div>

@@ -34,6 +34,10 @@ type usePaginationProps = {
   currentPage: number;
 }
 
+type AlertProps = {
+  text: string;
+}
+
 type Word = {
   id: string;
   group: number;
@@ -66,5 +70,6 @@ export {
   Word,
   WordsProps,
   usePaginationProps,
-  User
+  User,
+  AlertProps
 };
