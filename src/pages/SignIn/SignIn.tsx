@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { User } from '../../types/types';
 import img from '../../assets/5293.svg';
 import { NavLink } from 'react-router-dom';
+import { Alert } from '../../components/Alert/Alert';
 export const SignIn = () => {
   const {
     register,
@@ -21,17 +22,29 @@ export const SignIn = () => {
             <form className="flex flex-col items-center w-full">
               <div className="mb-6 w-full">
                 <input
-                  type="text"
+                  {...register('email', {
+                    required: true,
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: 'Incorrect email',
+                    },
+                  })}
+                  type="email"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Email address"
                 />
+                {errors.email?.type === 'required' ? <Alert text="Email is required" /> : null}
+                {errors.email && <Alert text={errors.email.message as string} />}
               </div>
               <div className="mb-6 w-full">
                 <input
+                  {...register('password', { required: true, minLength: 6 })}
                   type="password"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Password"
                 />
+                {errors.password?.type === 'required' && <Alert text="Password is required" />}
+                {errors.password?.type === 'minLength' && <Alert text="Password is too short" />}
               </div>
 
               <div className="flex justify-between items-center w-full mb-6">
@@ -58,9 +71,10 @@ export const SignIn = () => {
               </div>
               <button
                 type="submit"
-                className="inline-block px-7 py-3 bg-indigo-900 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                className="inline-block px-7 py-3 bg-indigo-900 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full disabled:bg-slate-500 disabled:hover:shadow-md disabled:cursor-not-allowed"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
+                disabled={!isValid}
               >
                 Вход
               </button>
