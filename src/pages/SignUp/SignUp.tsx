@@ -1,9 +1,13 @@
 import { useForm } from 'react-hook-form';
 
-import { RegisterFormProps, User } from '../../types/types';
+import { RegisteredUser, SignInResponse, User, UserData } from '../../types/types';
 import img from '../../assets/56431.svg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
 import { Alert } from '../../components/Alert/Alert';
+import { createUser, saveUserToStorage, signIn } from '../../services/api';
+
 export const SignUp = () => {
   const {
     register,
@@ -11,7 +15,33 @@ export const SignUp = () => {
     watch,
     reset,
     formState: { errors, isDirty, isValid },
-  } = useForm<RegisterFormProps>({ mode: 'onChange' });
+  } = useForm<UserData>({ mode: 'onChange' });
+  const [registrationError, setError] = useState('');
+  const navigate = useNavigate();
+  
+  const formData = async (data: UserData) => {
+    const user: User = {
+      name: data.name,
+      password: data.password,
+      email: data.email
+    };
+    const response = await createUser(user);
+    if (response === 417) {
+      setError('User with this email already exist');
+    }
+    if (response === 422) {
+      setError('Incorrect email or password');
+    }
+    if (typeof response === 'object') {
+      setError('');
+      const responseSignIn = await signIn(user) as SignInResponse;
+      console.log('responseSignIn', responseSignIn);
+      saveUserToStorage(responseSignIn);
+      navigate("/");
+      
+    }
+  };
+
   return (
     <section className="h-screen">
       <div className="flex px-6 py-12 h-full justify-center items-center">
@@ -20,7 +50,7 @@ export const SignUp = () => {
             <img src={img} className="w-full" alt="Phone image" />
           </div>
           <div className="md:w-8/12 lg:w-5/12">
-            <form className="flex flex-col items-center w-full">
+            <form className="flex flex-col items-center w-full" onSubmit={handleSubmit(formData)}>
               <div className="mb-6 w-full">
                 <input
                   {...register('name', { required: true, minLength: 2 })}
@@ -49,7 +79,7 @@ export const SignUp = () => {
               </div>
               <div className="mb-6 w-full">
                 <input
-                  {...register('password', { required: true, minLength: 6 })}
+                  {...register('password', { required: true, minLength: 8 })}
                   type="password"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Password"
@@ -59,19 +89,26 @@ export const SignUp = () => {
               </div>
               <div className="mb-6 w-full">
                 <input
-                  {...register('confirmPassword', 
-                  { required: true, 
-                    minLength: 6,
-                    validate:(val:string) => {
-                      if (watch("password") != val) return "Your passwords do not match";
-                    } })}
+                  {...register('confirmPassword', {
+                    required: true,
+                    minLength: 8,
+                    validate: (value?: string) => {
+                      if (watch('password') != value) return 'Your passwords do not match';
+                    },
+                  })}
                   type="password"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Confirm Password"
                 />
-                {errors.confirmPassword?.type === 'required' && <Alert text="Password is required" />}
-                {errors.confirmPassword?.type === 'minLength' && <Alert text="Password is too short" />}
-                {errors.confirmPassword && <Alert text={errors.confirmPassword.message as string} />}
+                {errors.confirmPassword?.type === 'required' && (
+                  <Alert text="Password is required" />
+                )}
+                {errors.confirmPassword?.type === 'minLength' && (
+                  <Alert text="Password is too short" />
+                )}
+                {errors.confirmPassword && (
+                  <Alert text={errors.confirmPassword.message as string} />
+                )}
               </div>
               <div className="flex justify-between items-center w-full mb-6">
                 <NavLink
@@ -90,6 +127,7 @@ export const SignUp = () => {
               >
                 Регистрация
               </button>
+              {registrationError ? <Alert text={registrationError} /> : null}
             </form>
           </div>
         </div>

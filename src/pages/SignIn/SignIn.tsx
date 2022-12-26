@@ -1,9 +1,12 @@
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 
-import { User } from '../../types/types';
+import { SignInResponse, User } from '../../types/types';
 import img from '../../assets/5293.svg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Alert } from '../../components/Alert/Alert';
+import { saveUserToStorage, signIn } from '../../services/api';
+
 export const SignIn = () => {
   const {
     register,
@@ -11,6 +14,20 @@ export const SignIn = () => {
     reset,
     formState: { errors, isDirty, isValid },
   } = useForm<User>({ mode: 'all' });
+  const [registrationError, setError] = useState('');
+  const navigate = useNavigate();
+  
+  const formData = async (user: User) => {
+    const response = await signIn(user);
+    if (typeof response === 'object') {
+      setError('');
+      saveUserToStorage(response);
+      console.log(response);
+      navigate("/");
+    }
+    if (response === 404) setError("User with this email doesn't exist");
+  };
+
   return (
     <section className="h-screen">
       <div className="flex px-6 py-12 h-full justify-center items-center">
@@ -19,7 +36,7 @@ export const SignIn = () => {
             <img src={img} className="w-full" alt="Phone image" />
           </div>
           <div className="md:w-8/12 lg:w-5/12">
-            <form className="flex flex-col items-center w-full">
+            <form className="flex flex-col items-center w-full" onSubmit={handleSubmit(formData)}>
               <div className="mb-6 w-full">
                 <input
                   {...register('email', {
@@ -78,6 +95,7 @@ export const SignIn = () => {
               >
                 Вход
               </button>
+              {registrationError ? <Alert text={registrationError} /> : null}
             </form>
           </div>
         </div>

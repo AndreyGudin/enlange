@@ -61,12 +61,27 @@ type User = {
   password: string;
 };
 
-type RegisterFormProps ={
+type UserData ={
   name: string;
   email?: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
 }
+
+type RegisteredUser = {
+  email: string;
+  id: string;
+  name: string;
+}
+
+type SignInResponse = {
+  message: string;
+  token: string;
+  refreshToken: string;
+  userId: string;
+  name: string;
+  [key: string]: string;
+};
 
 export {
   UsingStatsProps,
@@ -79,5 +94,7 @@ export {
   usePaginationProps,
   User,
   AlertProps,
-  RegisterFormProps
+  UserData,
+  RegisteredUser,
+  SignInResponse
 };
