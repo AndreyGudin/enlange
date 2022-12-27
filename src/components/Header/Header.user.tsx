@@ -1,6 +1,14 @@
 import { NavLink } from 'react-router-dom';
+import { SignInResponse } from '../../types/types';
 
 export const SignedInUserButtons = () => {
+
+  const handleSignOut = () => {
+    const user = JSON.parse(localStorage.getItem("user") as string) as SignInResponse;
+    if (user) localStorage.removeItem("user");
+    
+  }
+
   return (
     <div className="flex gap-3">
       <NavLink to="/user">

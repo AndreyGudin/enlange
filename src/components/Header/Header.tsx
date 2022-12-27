@@ -1,9 +1,11 @@
+import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { HeaderProps } from '../../types/props';
 import { AuthButtons } from './Header.guest';
 import { SignedInUserButtons } from './Header.user';
 
 export const Header = ({userInfo}:HeaderProps) => {
+
   return (
     <header className="flex flex-row w-full justify-around align-middle p-3 sticky top-0">
       <div>
