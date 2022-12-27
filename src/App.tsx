@@ -1,24 +1,28 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 
 import { Header } from './components/Header/Header';
 import { SignIn } from './pages/SignIn/SignIn';
 import { SignUp } from './pages/SignUp/SignUp';
 
 import { Welcome } from './pages/Welcome/Welcome';
+import { SignInResponse } from './types/types';
 
 const Textbook = lazy(() => import('./pages/Textbook/Textbook'));
 
+
 function App() {
+  const [userInfo, setUser] = useState<SignInResponse | null>(null);
+
   return (
     <BrowserRouter basename={'/'}>
-      <Header />
+      <Header userInfo={userInfo}/>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/" element={<Welcome />} />
+          <Route path="/" element={<Welcome/>} />
           <Route path="/textbook" element={<Textbook />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn setUser={setUser}/>} />
+          <Route path="/signup" element={<SignUp setUser={setUser}/>} />
         </Routes>
       </Suspense>
     </BrowserRouter>

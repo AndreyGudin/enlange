@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 
-import { RegisteredUser, SignInResponse, User, UserData } from '../../types/types';
+import { SignInResponse, User, UserData } from '../../types/types';
+import { AuthProps } from '../../types/props';
 import img from '../../assets/56431.svg';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -8,7 +9,7 @@ import { useState } from 'react';
 import { Alert } from '../../components/Alert/Alert';
 import { createUser, saveUserToStorage, signIn } from '../../services/api';
 
-export const SignUp = () => {
+export const SignUp = ({setUser}:AuthProps) => {
   const {
     register,
     handleSubmit,
@@ -36,7 +37,8 @@ export const SignUp = () => {
       setError('');
       const responseSignIn = await signIn(user) as SignInResponse;
       console.log('responseSignIn', responseSignIn);
-      saveUserToStorage(responseSignIn);
+      setUser(responseSignIn);
+
       navigate("/");
       
     }

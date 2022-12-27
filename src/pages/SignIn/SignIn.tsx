@@ -1,13 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
-import { SignInResponse, User } from '../../types/types';
+import { User } from '../../types/types';
+import { AuthProps } from '../../types/props';
 import img from '../../assets/5293.svg';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Alert } from '../../components/Alert/Alert';
 import { saveUserToStorage, signIn } from '../../services/api';
 
-export const SignIn = () => {
+export const SignIn = ({setUser}:AuthProps) => {
   const {
     register,
     handleSubmit,
@@ -21,7 +22,7 @@ export const SignIn = () => {
     const response = await signIn(user);
     if (typeof response === 'object') {
       setError('');
-      saveUserToStorage(response);
+      setUser(response);
       console.log(response);
       navigate("/");
     }

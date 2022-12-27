@@ -1,6 +1,9 @@
 import { NavLink } from 'react-router-dom';
+import { HeaderProps } from '../../types/props';
+import { AuthButtons } from './Header.guest';
+import { SignedInUserButtons } from './Header.user';
 
-export const Header = () => {
+export const Header = ({userInfo}:HeaderProps) => {
   return (
     <header className="flex flex-row w-full justify-around align-middle p-3">
       <div>
@@ -38,16 +41,7 @@ export const Header = () => {
           Автор
         </NavLink>
       </nav>
-      <div className="flex flex-row gap-5 items-center">
-        <NavLink to="/signin">
-          <button className="text-white">Вход</button>
-        </NavLink>
-        <NavLink to="/signup">
-          <button className="text-white w-[137px] h-[52px] bg-purple-600 rounded hover:bg-purple-500 duration-300">
-            Присоединится
-          </button>
-        </NavLink>
-      </div>
+      {userInfo ? <SignedInUserButtons /> : <AuthButtons />}
     </header>
   );
 };

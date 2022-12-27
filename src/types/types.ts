@@ -1,16 +1,6 @@
-import React from 'react';
-
-type UsingStatsProps = {
-  stats: UsingStatsType[];
-};
-
 type UsingStatsType = {
   title: string;
   info: string;
-};
-
-type DescriptionProps = {
-  cards: React.ReactNode;
 };
 
 type AdvantagesCardsType = {
@@ -18,25 +8,6 @@ type AdvantagesCardsType = {
   title: string;
   description: string;
 };
-
-type AdvantagesCardsProps = {
-  cards: AdvantagesCardsType[];
-};
-
-type WordsProps = {
-  words: Word[];
-}
-
-type usePaginationProps = {
-  totalCount: number;
-  pageSize: number;
-  siblingCount: number;
-  currentPage: number;
-}
-
-type AlertProps = {
-  text: string;
-}
 
 type Word = {
   id: string;
@@ -84,16 +55,10 @@ type SignInResponse = {
 };
 
 export {
-  UsingStatsProps,
   UsingStatsType,
-  DescriptionProps,
   AdvantagesCardsType,
-  AdvantagesCardsProps,
   Word,
-  WordsProps,
-  usePaginationProps,
   User,
-  AlertProps,
   UserData,
   RegisteredUser,
   SignInResponse
