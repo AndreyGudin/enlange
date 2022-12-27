@@ -22,6 +22,7 @@ export const SignIn = ({setUser}:AuthProps) => {
     const response = await signIn(user);
     if (typeof response === 'object') {
       setError('');
+      saveUserToStorage(response);
       setUser(response);
       console.log(response);
       navigate("/");

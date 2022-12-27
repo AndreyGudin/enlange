@@ -41,7 +41,7 @@ export const Pagination = ({ onPageChange, currentPage }: PaginationProps) => {
       </li>
       {paginationRange?.map((pageNumber, i) => {
         if (pageNumber === DOTS) {
-          return <li className="pagination-item hover:cursor-default hover:bg-transparent hover:text-slate-400">&#8230;</li>;
+          return  <li key={i} className="pagination-item hover:cursor-default hover:bg-transparent hover:text-slate-400">&#8230;</li>;
         }
         let selected = pageNumber === currentPage ? 'border' : '';
         return (

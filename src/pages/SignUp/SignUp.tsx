@@ -36,9 +36,8 @@ export const SignUp = ({setUser}:AuthProps) => {
     if (typeof response === 'object') {
       setError('');
       const responseSignIn = await signIn(user) as SignInResponse;
-      console.log('responseSignIn', responseSignIn);
+      saveUserToStorage(responseSignIn);
       setUser(responseSignIn);
-
       navigate("/");
       
     }

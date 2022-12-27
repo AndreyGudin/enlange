@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 
 import { Header } from './components/Header/Header';
 import { SignIn } from './pages/SignIn/SignIn';
@@ -15,6 +15,10 @@ const Textbook = lazy(() => import('./pages/Textbook/Textbook'));
 function App() {
   const [userInfo, setUser] = useState<SignInResponse | null>(null);
 
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") as string) as SignInResponse;
+    if (user) setUser(user);
+  }, [])
   return (
     <BrowserRouter basename={'/'}>
       <Header userInfo={userInfo}/>
