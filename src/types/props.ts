@@ -36,6 +36,10 @@ type AuthProps = {
   setUser: Dispatch<SetStateAction<SignInResponse | null>>;
 };
 
+type UserProps = {
+  userInfo: SignInResponse | null;
+};
+
 export {
   UsingStatsProps,
   DescriptionProps,
@@ -45,4 +49,5 @@ export {
   AlertProps,
   HeaderProps,
   AuthProps,
+  UserProps
 };

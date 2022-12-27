@@ -5,7 +5,7 @@ import { SignedInUserButtons } from './Header.user';
 
 export const Header = ({userInfo}:HeaderProps) => {
   return (
-    <header className="flex flex-row w-full justify-around align-middle p-3">
+    <header className="flex flex-row w-full justify-around align-middle p-3 sticky top-0">
       <div>
         <h1 className="text-3xl">Enlange</h1>
       </div>
