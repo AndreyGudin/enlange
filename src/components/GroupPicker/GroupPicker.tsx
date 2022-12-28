@@ -1,13 +1,17 @@
 import React, { useState } from "react";
+import { GroupPickerProps } from "../../types/props";
 
-export const GroupPicker = () => {
+export const GroupPicker = ({setCurrentGroup}:GroupPickerProps) => {
   const [active, setActive] = useState(1);
   const length = 6;
   const groups = Array.from({ length }, (_, idx) => idx + 1);
 
   const handleClick = (e:React.MouseEvent<HTMLDivElement>) => {
     const clickedGroup = +(e.target as HTMLDivElement).textContent!;
-    if (clickedGroup) setActive(clickedGroup);
+    if (clickedGroup) {
+      setActive(clickedGroup);
+      setCurrentGroup(clickedGroup);
+    }
   }
     const clicked = "outline outline-4 outline-purple-500";
   return (

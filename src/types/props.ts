@@ -41,6 +41,11 @@ type SignedInButtonsProps = {
   setUser: Dispatch<SetStateAction<SignInResponse | null>>;
 };
 
+type GroupPickerProps = {
+  setCurrentGroup: Dispatch<SetStateAction<number>>;
+};
+
+
 type UserProps = {
   userInfo: SignInResponse | null;
 };
@@ -55,5 +60,6 @@ export {
   HeaderProps,
   AuthProps,
   UserProps,
-  SignedInButtonsProps
+  SignedInButtonsProps,
+  GroupPickerProps
 };

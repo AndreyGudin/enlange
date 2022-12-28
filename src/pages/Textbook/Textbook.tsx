@@ -7,14 +7,15 @@ import { Word } from '../../types/types';
 
 const Textbook = () => {
   const [wordCards, setCards] = useState<Word[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentGroup, setCurrentGroup] = useState<number>(1);
   useEffect(() => {
-    getWords(currentPage, 1).then((r) => setCards(r));
-  }, [currentPage]);
+    getWords(currentPage, currentGroup).then((r) => setCards(r));
+  }, [currentPage,currentGroup]);
   return (
     <div className="flex flex-col items-center">
       <Words words={wordCards} />
-      <GroupPicker />
+      <GroupPicker setCurrentGroup={setCurrentGroup}/>
       <Pagination 
         onPageChange={page => setCurrentPage(page)}
         currentPage={currentPage}
