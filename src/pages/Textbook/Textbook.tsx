@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { GroupPicker } from '../../components/GroupPicker/GroupPicker';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { Words } from '../../components/Words/Words';
 import { getWords } from '../../services/api';
@@ -13,6 +14,7 @@ const Textbook = () => {
   return (
     <div className="flex flex-col items-center">
       <Words words={wordCards} />
+      <GroupPicker />
       <Pagination 
         onPageChange={page => setCurrentPage(page)}
         currentPage={currentPage}

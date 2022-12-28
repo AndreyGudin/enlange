@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { usePaginationProps } from '../types/types';
+import { usePaginationProps } from '../types/props';
 
 export const DOTS = '...';
 
