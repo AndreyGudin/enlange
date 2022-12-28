@@ -30,9 +30,14 @@ type AlertProps = {
 
 type HeaderProps = {
   userInfo: SignInResponse | null;
+  setUser: Dispatch<SetStateAction<SignInResponse | null>>;
 };
 
 type AuthProps = {
+  setUser: Dispatch<SetStateAction<SignInResponse | null>>;
+};
+
+type SignedInButtonsProps = {
   setUser: Dispatch<SetStateAction<SignInResponse | null>>;
 };
 
@@ -49,5 +54,6 @@ export {
   AlertProps,
   HeaderProps,
   AuthProps,
-  UserProps
+  UserProps,
+  SignedInButtonsProps
 };

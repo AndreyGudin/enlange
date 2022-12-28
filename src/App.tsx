@@ -21,7 +21,7 @@ function App() {
   }, [])
   return (
     <BrowserRouter basename={'/'}>
-      <Header userInfo={userInfo}/>
+      <Header userInfo={userInfo} setUser={setUser}/>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Welcome/>} />

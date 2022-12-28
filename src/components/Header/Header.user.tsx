@@ -1,11 +1,16 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { SignedInButtonsProps } from '../../types/props';
 import { SignInResponse } from '../../types/types';
 
-export const SignedInUserButtons = () => {
-
+export const SignedInUserButtons = ({setUser}:SignedInButtonsProps) => {
+  const navigate = useNavigate();
   const handleSignOut = () => {
     const user = JSON.parse(localStorage.getItem("user") as string) as SignInResponse;
-    if (user) localStorage.removeItem("user");
+    if (user) {
+      localStorage.removeItem("user");
+      setUser(null);
+      navigate("/");
+    }
     
   }
 
@@ -16,7 +21,7 @@ export const SignedInUserButtons = () => {
           Пользователь
         </button>
       </NavLink>
-      <button className="hover:underline">Выйти</button>
+      <button className="hover:underline" onClick={handleSignOut}>Выйти</button>
     </div>
   );
 };

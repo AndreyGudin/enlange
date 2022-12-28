@@ -4,7 +4,7 @@ import { HeaderProps } from '../../types/props';
 import { AuthButtons } from './Header.guest';
 import { SignedInUserButtons } from './Header.user';
 
-export const Header = ({userInfo}:HeaderProps) => {
+export const Header = ({userInfo, setUser}:HeaderProps) => {
 
   return (
     <header className="flex flex-row w-full justify-around align-middle p-3 sticky top-0">
@@ -43,7 +43,7 @@ export const Header = ({userInfo}:HeaderProps) => {
           Автор
         </NavLink>
       </nav>
-      {userInfo ? <SignedInUserButtons /> : <AuthButtons />}
+      {userInfo ? <SignedInUserButtons setUser={setUser}/> : <AuthButtons />}
     </header>
   );
 };
