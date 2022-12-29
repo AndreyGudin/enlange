@@ -1,3 +1,4 @@
+import { json } from 'react-router-dom';
 import { RegisteredUser, SignInResponse, User, Word } from '../types/types';
 
 export enum ApiLinks {
@@ -17,6 +18,16 @@ const getWords = async (page: number, group: number) => {
   const response = await fetch(request);
   const data: Word[] = await response.json();
   return data;
+};
+
+const getRandomPagesFromGroup = async (arrOfPages: number[], group: number) => {
+  const response: Word[][] = await Promise.all(
+    arrOfPages.map((page) => {
+      return getWords(page, group);
+    })
+  );
+
+  return response.flat();
 };
 
 const createUser = async (user: User): Promise<RegisteredUser | number> => {
@@ -60,4 +71,4 @@ const saveUserToStorage = (SignInResponse: SignInResponse) => {
   localStorage.setItem('user', objToString);
 };
 
-export { getWords, createUser, signIn, saveUserToStorage };
+export { getWords, createUser, signIn, saveUserToStorage, getRandomPagesFromGroup };
