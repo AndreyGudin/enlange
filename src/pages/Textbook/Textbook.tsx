@@ -11,17 +11,22 @@ const Textbook = () => {
   const [currentGroup, setCurrentGroup] = useState<number>(1);
   useEffect(() => {
     getWords(currentPage, currentGroup).then((r) => setCards(r));
-  }, [currentPage,currentGroup]);
+  }, [currentPage, currentGroup]);
+
+  const styleForGroupContainer =
+    'rounded-full bg-white w-8 h-8 hover:cursor-pointer text-black text-lg flex justify-center items-center';
+  const styleForGroupElements = 'flex flex-col gap-3 fixed top-1/2 left-[96.6%]';
   return (
     <div className="flex flex-col items-center">
       <Words words={wordCards} />
-      <GroupPicker setCurrentGroup={setCurrentGroup}/>
-      <Pagination 
-        onPageChange={page => setCurrentPage(page)}
-        currentPage={currentPage}
+      <GroupPicker
+        setCurrentGroup={setCurrentGroup}
+        styleForContainer={styleForGroupContainer}
+        styleForGroupElements={styleForGroupElements}
       />
+      <Pagination onPageChange={(page) => setCurrentPage(page)} currentPage={currentPage} />
     </div>
   );
 };
 
-export {Textbook as default};
+export { Textbook as default };

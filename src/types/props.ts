@@ -43,6 +43,8 @@ type SignedInButtonsProps = {
 
 type GroupPickerProps = {
   setCurrentGroup: Dispatch<SetStateAction<number>>;
+  styleForGroupElements: string;
+  styleForContainer: string;
 };
 
 

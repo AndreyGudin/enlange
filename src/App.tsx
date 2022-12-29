@@ -8,6 +8,7 @@ import { SignUp } from './pages/SignUp/SignUp';
 import { Welcome } from './pages/Welcome/Welcome';
 import { SignInResponse } from './types/types';
 import { User } from './pages/User/User';
+import { AudioChallenge } from './pages/AudioChallenge/AudioChallenge';
 
 const Textbook = lazy(() => import('./pages/Textbook/Textbook'));
 
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Welcome/>} />
           <Route path="/textbook" element={<Textbook />} />
+          <Route path="/games" element={<AudioChallenge />} />
           <Route path="/signin" element={<SignIn setUser={setUser}/>} />
           <Route path="/signup" element={<SignUp setUser={setUser}/>} />
           <Route path="/user" element={<User userInfo={userInfo}/>} />

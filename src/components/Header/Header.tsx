@@ -42,6 +42,16 @@ export const Header = ({userInfo, setUser}:HeaderProps) => {
         >
           Автор
         </NavLink>
+        <NavLink
+          to="/games"
+          className={({ isActive }) =>
+            isActive
+              ? 'underline text-white hover:underline hover:text-white'
+              : 'text-white hover:underline hover:text-white'
+          }
+        >
+          Мини-игры
+        </NavLink>
       </nav>
       {userInfo ? <SignedInUserButtons setUser={setUser}/> : <AuthButtons />}
     </header>
