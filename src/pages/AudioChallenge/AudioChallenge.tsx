@@ -22,13 +22,15 @@ export const AudioChallenge = () => {
           styleForGroupElements={styleForGroupElements}
         />
       )}
-
-      <button
+      {
+        startGame ? null: <button
         onClick={handleClick}
         className="text-white w-[137px] h-[52px] bg-purple-600 rounded hover:bg-purple-500 duration-300"
       >
         Старт
       </button>
+      }
+      
     </div>
   );
 };

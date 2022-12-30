@@ -52,6 +52,11 @@ type UserProps = {
   userInfo: SignInResponse | null;
 };
 
+type WordsForAudioChallenge = {
+  answers: Word[];
+  choices: Word[][];
+  loading: boolean;
+}
 export {
   UsingStatsProps,
   DescriptionProps,
@@ -63,5 +68,6 @@ export {
   AuthProps,
   UserProps,
   SignedInButtonsProps,
-  GroupPickerProps
+  GroupPickerProps,
+  WordsForAudioChallenge
 };
