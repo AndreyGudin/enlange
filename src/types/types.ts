@@ -54,6 +54,12 @@ type SignInResponse = {
   [key: string]: string;
 };
 
+type UserAnswers = {
+  word: string,
+  answer: string;
+  isRight:boolean;
+}
+
 export {
   UsingStatsType,
   AdvantagesCardsType,
@@ -61,5 +67,6 @@ export {
   User,
   UserData,
   RegisteredUser,
-  SignInResponse
+  SignInResponse,
+  UserAnswers
 };

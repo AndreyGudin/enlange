@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { AdvantagesCardsType, SignInResponse, UsingStatsType, Word } from './types';
+import { AdvantagesCardsType, SignInResponse, UsingStatsType, Word, UserAnswers } from './types';
 
 type UsingStatsProps = {
   stats: UsingStatsType[];
@@ -57,6 +57,11 @@ type WordsForAudioChallenge = {
   choices: Word[][];
   loading: boolean;
 }
+
+type GameResultProps = {
+  userAnswers: UserAnswers[];
+}
+
 export {
   UsingStatsProps,
   DescriptionProps,
@@ -69,5 +74,6 @@ export {
   UserProps,
   SignedInButtonsProps,
   GroupPickerProps,
-  WordsForAudioChallenge
+  WordsForAudioChallenge,
+  GameResultProps
 };
