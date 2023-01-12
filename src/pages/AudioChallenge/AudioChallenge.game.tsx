@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { GameResults } from '../../components/GameResults/GameResults';
 
+import { GameResults } from '../../components/GameResults/GameResults';
 import { useWordsForAudioChallengeGame } from '../../hooks/useWordsForAudioChallengeGame';
 import { ApiLinks } from '../../services/api';
 import { UserAnswers, Word } from '../../types/types';
+
+import playing from '../../assets/61376.svg';
 
 export const AudioChallengeGame = () => {
   const { answers, choices, loading } = useWordsForAudioChallengeGame();
@@ -52,9 +54,8 @@ export const AudioChallengeGame = () => {
       {next > 19 ? (
         <GameResults userAnswers={userAnswers} />
       ) : (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 items-center">
           <div>
-            <div>
               {loading ? null : (
                 <audio
                   autoPlay
@@ -62,12 +63,10 @@ export const AudioChallengeGame = () => {
                   src={`${ApiLinks.Link}/${answers[next].audio}`}
                 ></audio>
               )}
-            </div>
-            <div>
-              {loading || !isAnswered ? null : (
-                <img src={`${ApiLinks.Link}/${answers[next].image}`} alt="" />
+              {loading || !isAnswered ? <img className="w-32 h-auto" src={playing} alt="word" /> 
+              : 
+              (<img src={`${ApiLinks.Link}/${answers[next].image}`} alt="word" />
               )}
-            </div>
             <div>{loading || !isAnswered ? null : answers[next].word}</div>
           </div>
           <div className="flex gap-3">
