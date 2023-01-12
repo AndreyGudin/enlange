@@ -1,12 +1,7 @@
-import { useEffect } from 'react';
 import { GameResultProps } from '../../types/props';
 
 export const GameResults = ({ userAnswers }: GameResultProps) => {
-  useEffect(() => {
-    console.log(userAnswers);
 
-  }, [])
-  
   return (
     <div className="bg-slate-400 p-3">
       <h3 className="text-3xl font-bold my-4">Результаты</h3>

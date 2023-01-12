@@ -19,20 +19,21 @@ export const GroupPicker = ({
   };
   const clicked = 'outline outline-4 outline-purple-500';
   return (
-    <div className={`${styleForContainer}`}>
-      {groups.map((group, i) => {
-        return (
-          <div
-            onClick={handleClick}
-            key={i}
-            className={`${
-              active === i + 1 ? clicked : ''
-            } ${styleForGroupElements}`}
-          >
-            {group}
-          </div>
-        );
-      })}
+    <div className="flex flex-col gap-3">
+      <h3 className="text-3xl text-center">Выберите сложность</h3>
+      <div className={`${styleForContainer}`}>
+        {groups.map((group, i) => {
+          return (
+            <div
+              onClick={handleClick}
+              key={i}
+              className={`${active === i + 1 ? clicked : ''} ${styleForGroupElements}`}
+            >
+              {group}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
