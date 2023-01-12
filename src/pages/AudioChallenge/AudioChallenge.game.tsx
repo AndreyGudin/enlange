@@ -56,18 +56,21 @@ export const AudioChallengeGame = () => {
       ) : (
         <div className="flex flex-col gap-5 items-center">
           <div>
-              {loading ? null : (
-                <audio
-                  autoPlay
-                  ref={refAudio}
-                  src={`${ApiLinks.Link}/${answers[next].audio}`}
-                ></audio>
-              )}
-              {loading || !isAnswered ? <img className="w-32 h-auto" src={playing} alt="word" /> 
-              : 
-              (<img src={`${ApiLinks.Link}/${answers[next].image}`} alt="word" />
-              )}
-            <div>{loading || !isAnswered ? null : answers[next].word}</div>
+            {loading ? null : (
+              <audio
+                autoPlay
+                ref={refAudio}
+                src={`${ApiLinks.Link}/${answers[next].audio}`}
+              ></audio>
+            )}
+            {loading || !isAnswered ? (
+              <img className="w-32 h-auto" src={playing} alt="word" />
+            ) : (
+              <img src={`${ApiLinks.Link}/${answers[next].image}`} alt="word" />
+            )}
+            <div className="text-6xl text-center">
+              {loading || !isAnswered ? null : answers[next].word}
+            </div>
           </div>
           <div className="flex gap-3">
             {loading

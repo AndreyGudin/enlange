@@ -14,7 +14,7 @@ export const AudioChallenge = () => {
   const styleForGroupElements =
     'w-20 h-20 flex justify-center items-center bg-slate-400 border hover:cursor-pointer';
   return (
-    <div className="flex flex-col items-center gap-10">
+    <div className="w-4/5 h-3/5 border rounded flex flex-col justify-center items-center gap-10 backdrop-blur-xl shadow-lg shadow-white">
       {startGame ? <AudioChallengeGame /> : (
         <GroupPicker
           setCurrentGroup={setGroup}
