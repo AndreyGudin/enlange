@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
 import { GameResults } from '../../components/GameResults/GameResults';
 import { useWordsForAudioChallengeGame } from '../../hooks/useWordsForAudioChallengeGame';
@@ -6,12 +7,14 @@ import { ApiLinks } from '../../services/api';
 import { UserAnswers, Word } from '../../types/types';
 
 import playing from '../../assets/61376.svg';
-
+import './animations.scss';
 export const AudioChallengeGame = () => {
   const { answers, choices, loading } = useWordsForAudioChallengeGame();
   const [next, setNext] = useState(0);
   const [clicked, setClicked] = useState('');
   const refAudio = useRef<HTMLAudioElement>(null);
+  const refImage = useRef<HTMLImageElement>(null);
+  const refImage2 = useRef<HTMLImageElement>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [userAnswers, setUserAnswers] = useState<UserAnswers[]>([]);
 
@@ -63,11 +66,28 @@ export const AudioChallengeGame = () => {
                 src={`${ApiLinks.Link}/${answers[next].audio}`}
               ></audio>
             )}
-            {loading || !isAnswered ? (
-              <img className="w-32 h-auto" src={playing} alt="word" />
-            ) : (
-              <img src={`${ApiLinks.Link}/${answers[next].image}`} alt="word" />
-            )}
+            <CSSTransition
+              in={!isAnswered}
+              nodeRef={refImage2}
+              timeout={300}
+              classNames="image"
+              unmountOnExit
+            >
+              <img ref={refImage2} className="w-32 h-auto" src={playing} alt="word" />
+            </CSSTransition>
+            <CSSTransition
+              in={isAnswered}
+              nodeRef={refImage}
+              timeout={{ appear: 300, enter: 300, exit: 0 }}
+              classNames="image"
+              unmountOnExit
+            >
+              {loading ? (
+                <span></span>
+              ) : (
+                <img ref={refImage} src={`${ApiLinks.Link}/${answers[next].image}`} alt="word" />
+              )}
+            </CSSTransition>
             <div className="text-6xl text-center">
               {loading || !isAnswered ? null : answers[next].word}
             </div>
