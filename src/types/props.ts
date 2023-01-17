@@ -62,6 +62,12 @@ type GameResultProps = {
   userAnswers: UserAnswers[];
 }
 
+type QuestionsProps = {
+  next: number;
+  setNext: Dispatch<SetStateAction<number>>;
+  setUserAnswers: Dispatch<SetStateAction<UserAnswers[]>>;
+}
+
 export {
   UsingStatsProps,
   DescriptionProps,
@@ -75,5 +81,6 @@ export {
   SignedInButtonsProps,
   GroupPickerProps,
   WordsForAudioChallenge,
-  GameResultProps
+  GameResultProps,
+  QuestionsProps
 };
